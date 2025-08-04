@@ -36,5 +36,6 @@ if __name__ == "__main__":
     # 测试用例1：基础案例
     n = 3
     print("测试用例1输入:", n)
-    print("测试用例1输出:", solution.generateParenthesis(n))  # 预期输出: ["((()))","(()())","(())()","()(())","()()()"]
+    print("测试用例1输出:", solution.generateParenthesis(n))
+    # 预期输出: ["((()))","(()())","(())()","()(())","()()()"]
 
