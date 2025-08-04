@@ -36,7 +36,7 @@ class Solution:
         if len(candidates) == 0:
             return []
 
-        def dfs(candidates, target, begin, path, res)->None:
+        def dfs(candidates, target, begin, tmp, path)->None:
             """
             由于题目中说，每个元素可以重复，考虑所有候选数，所以导致了重复。
             可不可以在搜索的时候就去重呢？答案是可以的。
@@ -44,22 +44,24 @@ class Solution:
             具体的做法是：
             每一次搜索的时候设置 下一轮搜索的起点 begin
             """
-            if target < 0:
-                return
+
             if target == 0:
-                res.append(path)
+                path.append(tmp[:])
                 return
 
             for index in range(begin, len(candidates)):
-                dfs(candidates, target - candidates[index], index, path + [candidates[index]], res)
+                if target < candidates[index]:
+                    return
+                tmp.append(candidates[index])
+                dfs(candidates, target - candidates[index], index, tmp, path)
+                tmp.pop()
 
         candidates.sort()
 
         path = []
-        res = []
-        dfs(candidates, target, 0, path, res)
+        dfs(candidates, target, 0, [], path)
 
-        return res
+        return path
 
 
 if __name__ == "__main__":
