@@ -1,5 +1,6 @@
 from typing import List
 
+# 713. 乘积小于 K 的子数组
 class Solution:
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
 
