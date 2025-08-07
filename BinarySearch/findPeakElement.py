@@ -29,3 +29,9 @@ if __name__ == "__main__":
     print("测试用例1输入nums = {}:".format(nums))
     print("测试用例1输出:", solution.findPeakElement(nums))
     # 预期输出: 2
+
+    # 测试用例1：基础案例
+    nums = [1,2,1,3,5,6,4]
+    print("测试用例1输入nums = {}:".format(nums))
+    print("测试用例1输出:", solution.findPeakElement(nums))
+    # 预期输出: 1 或 5
