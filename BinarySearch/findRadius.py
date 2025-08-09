@@ -1,4 +1,5 @@
 from typing import List
+from myLeetcodeUtils import upper_bound
 
 # 475. 供暖器
 class Solution:
@@ -10,12 +11,16 @@ class Solution:
             left = 0
             right = len(heaters) - 1
             dist = float("Inf")
-            while left <= right:
-                mid = (left + right) // 2
-                if heaters[mid] - h <= 0:
-                    left = mid + 1
-                else:
-                    right = mid - 1
+
+            # while left <= right:
+            #             #     mid = (left + right) // 2
+            #             #     if heaters[mid] - h <= 0:
+            #             #         left = mid + 1
+            #             #     else:
+            #             #         right = mid - 1
+            # 用自己写的包函数替代上面这段循环
+            left = upper_bound(heaters, h)
+
             # 此时的left就是第一个大于h的值，left - 1就是最后一个小于h的值，
             # 但要注意，left -1 可能不存在，比如只有一个元素
             # 防止左侧最近的heater超出边界
@@ -39,24 +44,7 @@ class Solution:
 
 这里，需要理解，并自己手撕一个upper_bound，才能明白，循环结束时，left和right时，分别表示的含义
 该功能与python自带的函数：bisect_right功能一致
-
-def upper_bound(arr, target):
-    left = 0
-    right = len(arr) - 1  # 右边界初始化为数组最后一个元素的索引
-    
-    while left <= right:
-        mid = left + (right - left) // 2  # 避免整数溢出（Python中无此问题，但保持习惯）
-        
-        if arr[mid] <= target:
-            # 当前元素小于等于目标值，说明第一个大于target的位置在右侧
-            left = mid + 1
-        else:
-            # 当前元素大于目标值，可能是候选位置，但需继续向左查找更左侧的符合条件位置
-            right = mid - 1
-    
-    # 循环结束时，left即为第一个大于target的位置
-    return left
-
+详见我自己的包函数：upper_bound
 """
 
 if __name__ == "__main__":
