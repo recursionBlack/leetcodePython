@@ -30,28 +30,59 @@ from typing import List
 但面试可能会问到，所以第二种方法也要掌握
 """
 
+
+# class Solution:
+#     def trap(self, height: List[int]) -> int:
+#         n = len(height)
+#         left = 0
+#         right = n - 1
+#         # 用变量代替了原来，要用容器记录的前缀最大值
+#         pre_max = height[left]
+#         suf_max = height[right]
+#         ans = 0
+#
+#         while left < right:
+#             pre_max = max(pre_max, height[left])
+#             suf_max = max(suf_max, height[right])
+#             # 每次使两者中更低的向中间移动
+#             if pre_max < suf_max:
+#                 ans += pre_max - height[left]
+#                 left += 1
+#             else:
+#                 ans += suf_max - height[right]
+#                 right -= 1
+#
+#         return ans
+
+
 class Solution:
     def trap(self, height: List[int]) -> int:
-        n = len(height)
-        left = 0
-        right = n - 1
-        # 用变量代替了原来，要用容器记录的前缀最大值
-        pre_max = height[left]
-        suf_max = height[right]
         ans = 0
-
-        while left < right:
-            pre_max = max(pre_max, height[left])
-            suf_max = max(suf_max, height[right])
-            # 每次使两者中更低的向中间移动
-            if pre_max < suf_max:
-                ans += pre_max - height[left]
-                left += 1
-            else:
-                ans += suf_max - height[right]
-                right -= 1
+        st = []
+        for i, h in enumerate(height):
+            while st and h >= height[st[-1]]:
+                bottom_h = height[st.pop()]
+                # 如果栈已经空了
+                if not st:
+                    break
+                # 栈顶已经被弹出过一次了，这里其实是栈顶元素左侧的桶高，
+                # 所以才必须先检验栈是否已经空了
+                left = st[-1]
+                # 高度差，桶的左侧边缘和右侧边缘中，较低的，然后减去栈顶高度
+                dh = min(height[left], h) - bottom_h
+                # 面积 = 高度差 * 横向差
+                ans += dh * (i - left - 1)
+            st.append(i)
 
         return ans
+
+
+"""
+单调栈做法，相比于双指针，双指针是竖着计算每一个桶的容量，
+而单调栈则是基于横向做的.每次计算面积时，需要三个元素：
+当前的列（桶的右半边），栈顶（桶底高度），栈顶左侧（桶的左半边）
+
+"""
 
 if __name__ == "__main__":
     # 创建Solution实例
