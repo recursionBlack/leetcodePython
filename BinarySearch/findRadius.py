@@ -38,6 +38,7 @@ class Solution:
 并于ans比较，ans取所有房子最近的暖气距离的最大值，就是要找的答案
 
 这里，需要理解，并自己手撕一个upper_bound，才能明白，循环结束时，left和right时，分别表示的含义
+该功能与python自带的函数：bisect_right功能一致
 
 def upper_bound(arr, target):
     left = 0
