@@ -141,6 +141,27 @@ def bit_divide(a: int, b: int):
     offset = 1 if b < 0 else bit_negate(1)
     return bit_add(ans, offset)
 
+def bit_length(n: int):
+    """
+    计算整数的二进制表示长度（不包括符号位和前导零）
+    参数: n: 整数（可以是正数、负数或零）
+    返回: 表示该整数所需的最少二进制位数
+    """
+    # 处理0的特殊情况
+    if n == 0:
+        return 0
+
+    # 处理负数：取绝对值，因为负数的二进制表示包含符号位，这里只计算数值部分的长度
+    if n < 0:
+        n = -n
+
+    bit_length = 0
+    # 循环右移，直到数值变为0
+    while n > 0:
+        bit_length += 1
+        n = n >> 1  # 右移一位，相当于除以2并取整
+
+    return bit_length
 
 # 测试示例
 if __name__ == "__main__":
