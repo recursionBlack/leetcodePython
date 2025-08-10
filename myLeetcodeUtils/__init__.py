@@ -1,7 +1,7 @@
 # binary_utils/__init__.py
 
 # 从conversion.py导入函数，让包的使用者可以直接通过包名访问
-from .conversion import my_bin, binary_to_int, bit_divide
+from .BinaryOps import my_bin, binary_to_int, bit_divide
 from .upper_bound import upper_bound
 
 # 可选：定义包的版本信息

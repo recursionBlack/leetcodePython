@@ -21,27 +21,25 @@ def my_bin(n: int) -> str:
     return f"{sign}0b{''.join(bits)}"
 
 
-def binary_to_int(bin_str: str) -> int:
-    """将二进制字符串（如'101'或'-101'）转换为整数"""
-    if not bin_str:
-        raise ValueError("空字符串无法转换")
-
-    # 处理符号
-    sign = 1
-    start = 0
-    if bin_str[0] == '-':
-        sign = -1
-        start = 1
-    # 跳过可能的'0b'前缀
-    elif bin_str.startswith('0b', 0):
-        start = 2
+def binary_to_int(binary_str: str) -> int:
+    """
+    将二进制字符串转换为整数，使用位运算|，不使用幂运算
+    参数: binary_str: 合法的二进制字符串，仅包含'0'和'1'
+    返回: 对应的整数
+    异常: ValueError: 如果输入不是有效的二进制字符串
+    """
+    # 验证输入是否为有效的二进制字符串
+    if not isinstance(binary_str, str) or not binary_str or not all(c in '01' for c in binary_str):
+        raise ValueError("输入必须是仅包含'0'和'1'的非空字符串")
 
     result = 0
-    for i in range(start, len(bin_str)):
-        # 每次左移1位（等价于乘以2），再加上当前位的值
-        result = (result << 1) | (1 if bin_str[i] == '1' else 0)
+    for char in binary_str:
+        # 左移一位，相当于乘以2
+        result <<= 1
+        # 按位或操作，加上当前位的值（0或1）
+        result |= int(char)
 
-    return result * sign
+    return result
 
 
 def bit_add(a: int, b: int) -> int:
