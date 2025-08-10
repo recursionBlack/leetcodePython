@@ -163,6 +163,33 @@ def bit_length(n: int):
 
     return bit_length
 
+
+def bit_count(n):
+    """
+    计算整数二进制表示中1的个数（bit count）
+
+    参数:
+        n: 整数（可以是正数、负数或零）
+
+    返回:
+        二进制表示中1的个数
+    """
+    count = 0
+    # 处理负数：在Python中负数以补码形式表示，且位数不固定
+    # 这里将负数转换为等效的32位无符号整数进行计算
+    if n < 0:
+        n &= 0xFFFFFFFF  # 限制为32位无符号整数
+
+    # 循环检查每一位
+    while n > 0:
+        # 检查最低位是否为1
+        if n & 1:
+            count += 1
+        # 右移一位，处理下一位
+        n = n >> 1
+
+    return count
+
 # 测试示例
 if __name__ == "__main__":
     print(my_bin(0))  # 0b0
