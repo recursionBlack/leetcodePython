@@ -45,9 +45,13 @@ def binary_to_int(binary_str: str) -> int:
 def bit_add(a: int, b: int) -> int:
     """使用位运算实现32位整数加法"""
     mask = 0xFFFFFFFF  # 32位掩码，确保结果在32位范围内
+    a &= a
+    b &= b
     while b != 0:
         # 计算无进位相加结果和进位
-        a, b = (a ^ b) & mask, ((a & b) << 1) & mask
+        tmp = (a ^ b) & mask
+        b = ((a & b) << 1) & mask
+        a = tmp
     # 处理负数情况（将32位无符号整数转换为有符号整数）
     return a if a <= 0x7FFFFFFF else ~(a ^ mask)
 
