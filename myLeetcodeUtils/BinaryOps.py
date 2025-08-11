@@ -1,3 +1,5 @@
+from typing import List
+
 def my_bin(n: int) -> str:
     """将整数转换为二进制字符串，格式如'0b101'"""
     if n == 0:
@@ -193,6 +195,47 @@ def bit_count(n):
         n = n >> 1
 
     return count
+
+def toHex(self, num: int) -> str:
+
+    if num == 0:
+        return "0"
+
+    # 返回二进制的倒序列表
+    def toBit(num: int) -> List[int]:
+        cnt = []
+        while num > 0:
+            cnt.append(num & 1)
+            num >>= 1
+
+        return cnt
+
+    def toHexP(num) -> str:
+        bl = toBit(num)
+        i = 0
+        HexStr = ""
+        hexPar = "0123456789abcdef"
+        while i < len(bl):
+            # 每次取4个
+            chunk = bl[i:i + 4]
+            chunk.reverse()
+            # 转回整型
+            x = 0
+            if len(chunk) == 4:
+                x = (chunk[0] << 3) + (chunk[1] << 2) + (chunk[2] << 1) + (chunk[3])
+            else:
+                # 最后一个字符串长度可能达不到4
+                for j in range(len(chunk)):
+                    x += (chunk[j] << (len(chunk) - 1 - j))
+
+            HexStr = hexPar[x] + HexStr
+            i += 4
+        return HexStr
+
+    if num > 0:
+        return toHexP(num)
+    else:
+        return toHexP((1 << 32) + num)
 
 # 测试示例
 if __name__ == "__main__":
