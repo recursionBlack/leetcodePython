@@ -5,12 +5,20 @@ class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums = nums[:]
-        self.prefixSum = [0] * (len(nums) + 1)
+        n = len(nums)
+        # 前缀和数组的实现，非常重要，必须手撕
+        self.prefixSum = [0] * (n + 1)
         for i in range(1, len(self.prefixSum)):
-            self.prefixSum[i] = self.prefixSum[i - 1] + nums[i - 1]
+            self.prefixSum[i] = self.prefixSum[i-1] + nums[i-1]
+        # 后缀和数组的使用，非常重要，必须手撕
+        self.suffixSum = [0] * n
+        for i in range(n-2, -1, -1):
+            self.suffixSum[i] = self.suffixSum[i+1] + nums[i+1]
 
+    # 前缀和数组的使用
     def sumRange(self, left: int, right: int) -> int:
         return self.prefixSum[right + 1] - self.prefixSum[left]
+
 
 
 # Your NumArray object will be instantiated and called as such:
