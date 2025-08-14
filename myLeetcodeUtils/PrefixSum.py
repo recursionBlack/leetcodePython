@@ -76,3 +76,37 @@ class RandomSelect:
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(w)
 # param_1 = obj.pickIndex()
+
+
+from typing import List
+# 497. 非重叠矩形中的随机点
+class RectsRandomPoint:
+
+    def __init__(self, rects: List[List[int]]):
+        m = len(rects)
+        n = len(rects[0])
+        self.rects = [[0] * n] * m
+        self.prefix_sum = [0] * (m+1)       # 每个矩形的面积就是其权重
+        # 计算矩形的面积
+        def countPointsInRect(rect: List[int])->int:
+            return (rect[2] - rect[0] + 1)*(rect[3] - rect[1] + 1)
+
+        for i in range(m):
+            self.prefix_sum[i+1] = self.prefix_sum[i] + countPointsInRect(rects[i])
+            self.rects[i] = rects[i][:]
+
+        self.prefix_sum = self.prefix_sum[1:]
+
+    def pick(self) -> List[int]:
+        # 根据权重前缀和，确定选择了哪个矩形
+        seed = random.randint(1, self.prefix_sum[-1])
+        index = bisect_left(self.prefix_sum, seed)
+        rect = self.rects[index]
+        # 确定选择的矩形内的哪个点
+        x = random.randint(rect[0], rect[2])
+        y = random.randint(rect[1], rect[3])
+        return [x, y]
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(rects)
+# param_1 = obj.pick()
