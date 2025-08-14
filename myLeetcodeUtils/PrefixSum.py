@@ -110,3 +110,35 @@ class RectsRandomPoint:
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(rects)
 # param_1 = obj.pick()
+
+
+from sortedcontainers import SortedDict
+# 731. 我的日程安排表 II
+class MyCalendarTwo:
+    """
+    畜生问题！值的范围太大了，0~10**9，根本不能自定义一个这么长的数组，
+    所以直接用差分数组的想法破灭了。只能用排序好的字典，而该字典还是一个专门的包
+    需要自己导入
+
+    """
+
+    def __init__(self):
+        self.cnt = SortedDict()
+
+    def book(self, start: int, end: int) -> bool:
+        self.cnt[start] = self.cnt.get(start, 0) + 1
+        self.cnt[end] = self.cnt.get(end, 0) - 1
+        maxBook = 0
+        # 对顺序字典的值，取前缀和，
+        for c in self.cnt.values():
+            maxBook += c
+            if maxBook > 2:
+                self.cnt[start] = self.cnt.get(start, 0) - 1
+                self.cnt[end] = self.cnt.get(end, 0) + 1
+                return False
+
+        return True
+
+# Your MyCalendarTwo object will be instantiated and called as such:
+# obj = MyCalendarTwo()
+# param_1 = obj.book(startTime,endTime)
