@@ -142,3 +142,28 @@ class MyCalendarTwo:
 # Your MyCalendarTwo object will be instantiated and called as such:
 # obj = MyCalendarTwo()
 # param_1 = obj.book(startTime,endTime)
+
+
+# 差分数组工具类
+class Difference:
+    def __init__(self, nums: List[int]):
+        n = len(nums)
+        self.diff = [0] * n
+        self.diff[0] = nums[0]
+        for i in range(1, n):
+            self.diff[i] = nums[i] - nums[i-1]
+
+    # 给区间[i, j]内的值都增加val,可以是负数
+    def increment(self, i: int, j: int, val: int):
+        self.diff[i] += val
+        if j + 1 < len(self.diff):
+            self.diff[j+1] -= val
+
+    # 根据差分数组，返回结果数组，结果数组是差分数组的前缀和数组
+    def result(self):
+        n = len(self.diff)
+        prefix_sum = [0] * (n + 1)
+        for i in range(n):
+            prefix_sum[i+1] = prefix_sum[i] + self.diff[i]
+
+        return prefix_sum[1:]
