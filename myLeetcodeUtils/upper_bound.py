@@ -2,6 +2,9 @@ def upper_bound(arr, target):
     """
     手撕bisect_left函数
     from bisect import bisect_left
+    不过，还是有一些小小的不同，bisect_left(arr, target)是将target插入到arr里，
+    并返回插入位置的下标。如果插入的位置已经有值了，那么，返回的下标要比已有位置靠左，
+    这叫左插
     :param arr:数组
     :param target:目标
     :return:数组中，第一个大于target的值的下标

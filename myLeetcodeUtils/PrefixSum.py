@@ -119,6 +119,7 @@ class MyCalendarTwo:
     畜生问题！值的范围太大了，0~10**9，根本不能自定义一个这么长的数组，
     所以直接用差分数组的想法破灭了。只能用排序好的字典，而该字典还是一个专门的包
     需要自己导入
+    不算出生问题，因为很多中等题，都是要用这种解法，会这个题，差分问题基本上就都解决了
 
     """
 
@@ -141,6 +142,32 @@ class MyCalendarTwo:
 
 # Your MyCalendarTwo object will be instantiated and called as such:
 # obj = MyCalendarTwo()
+# param_1 = obj.book(startTime,endTime)
+
+# 732. 我的日程安排表 III
+class MyCalendarThree:
+    """
+    会做731题，732题稍作修改，就能用了
+
+    """
+
+    def __init__(self):
+        self.cnt = SortedDict()
+
+    def book(self, start: int, end: int) -> int:
+        self.cnt[start] = self.cnt.get(start, 0) + 1
+        self.cnt[end] = self.cnt.get(end, 0) - 1
+        maxBook = 0
+        ans = 0
+        # 对顺序字典的值，取前缀和，
+        for c in self.cnt.values():
+            maxBook += c
+            ans = max(ans, maxBook)
+
+        return ans
+
+# Your MyCalendarThree object will be instantiated and called as such:
+# obj = MyCalendarThree()
 # param_1 = obj.book(startTime,endTime)
 
 
