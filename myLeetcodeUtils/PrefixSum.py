@@ -49,3 +49,30 @@ class NumMatrix:
 # Your NumMatrix object will be instantiated and called as such:
 # obj = NumMatrix(matrix)
 # param_1 = obj.sumRegion(row1,col1,row2,col2)
+
+
+import random
+from bisect import bisect_left
+# 528. 按权重随机选择
+class RandomSelect:
+
+    def __init__(self, w: List[int]):
+        n = len(w)
+        self.prefix_sum = [0] * (n + 1)
+
+        # 前缀和
+        for i in range(n):
+            self.prefix_sum[i+1] = self.prefix_sum[i] + w[i]
+        self.prefix_sum = self.prefix_sum[1:]
+        print(self.prefix_sum)
+
+
+    def pickIndex(self) -> int:
+        seed = random.randint(1, self.prefix_sum[-1])
+        index = bisect_left(self.prefix_sum, seed)
+        return index
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(w)
+# param_1 = obj.pickIndex()
