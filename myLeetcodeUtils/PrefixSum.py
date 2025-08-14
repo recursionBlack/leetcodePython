@@ -153,7 +153,8 @@ class Difference:
         for i in range(1, n):
             self.diff[i] = nums[i] - nums[i-1]
 
-    # 给区间[i, j]内的值都增加val,可以是负数
+    # 给区间[i, j]内的值都增加val,可以是负数.
+    # 必须会手撕，解决差分问题的核心函数
     def increment(self, i: int, j: int, val: int):
         self.diff[i] += val
         if j + 1 < len(self.diff):
