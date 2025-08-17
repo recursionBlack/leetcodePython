@@ -73,3 +73,9 @@ if __name__ == "__main__":
     print("测试用例1输入 = {}:".format(arr))
     print("测试用例1输出:", solution.sumSubarrayMins(arr))
     # 预期输出: 17。最小值为 3，1，2，4，1，1，2，1，1，1，和为 17。
+
+    # 测试用例1：基础案例
+    arr = [11,81,94,43,3]
+    print("测试用例1输入 = {}:".format(arr))
+    print("测试用例1输出:", solution.sumSubarrayMins(arr))
+    # 预期输出: 444
