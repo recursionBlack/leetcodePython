@@ -10,27 +10,27 @@ from typing import List
 class Solution:
     def leftRightLess(self, arr: List[int]) -> List[List[int]]:
         n = len(arr)
-        stack = [0] * n
+        monoStack = []
         ans = []
         for i in range(n):
             ans.append([0, 0])
 
-        cur = r = 0     # cur是栈顶的值，r是栈顶指针
         # 遍历阶段
         for i in range(n):
-            while r > 0 and arr[i] <= arr[stack[r-1]]:
-                cur = stack[r-1]    # 栈顶元素值
-                r -= 1
-                ans[cur][0] = stack[r-1] if r > 0 else -1
+            while monoStack and arr[i] <= arr[monoStack[-1]]:
+                cur = monoStack[-1]    # 栈顶元素值
+                monoStack.pop()
+                left = monoStack[-1] if monoStack else -1   # 栈顶元素下压的那个元素
+                ans[cur][0] = left
                 ans[cur][1] = i
-            stack[r] = i
-            r += 1
+            monoStack.append(i)
 
         # 清算阶段。遍历完整个数组了，但栈内还有一些值，对栈内剩余值的处理
-        while r > 0:
-            cur = stack[r - 1]  # 栈顶元素值
-            r -= 1
-            ans[cur][0] = stack[r-1] if r > 0 else -1
+        while monoStack:
+            cur = monoStack[-1]  # 栈顶元素值
+            monoStack.pop()
+            left = monoStack[-1] if monoStack else -1  # 栈顶元素下压的那个元素
+            ans[cur][0] = left
             ans[cur][1] = -1
 
         # 修正阶段。因为该题未保证，数组中的每一个元素都不相同，所以有一些值是相等的，
