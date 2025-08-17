@@ -117,3 +117,39 @@ class MyCircularQueue:
 # param_4 = obj.Rear()
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
+
+# 901. 股票价格跨度
+class StockSpanner:
+
+    def __init__(self):
+        self.log = []
+        self.span = []
+        self.monoStack = []
+        self.size = 0
+
+    def next(self, price: int) -> int:
+
+        if not self.log:
+            self.log.append(price)
+            self.span.append(1)
+            self.monoStack.append(0)
+            self.size = 1
+            return self.span[-1]
+
+        newkua = 1
+        while self.monoStack and price >= self.log[self.monoStack[-1]]:
+            cur = self.monoStack[-1]
+            self.monoStack.pop()
+            newkua += self.span[cur]
+
+        self.log.append(price)
+        self.span.append(newkua)
+        self.monoStack.append(self.size)
+        self.size += 1
+
+        return self.span[-1]
+
+
+# Your StockSpanner object will be instantiated and called as such:
+# obj = StockSpanner()
+# param_1 = obj.next(price)
