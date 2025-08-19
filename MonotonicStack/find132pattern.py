@@ -3,14 +3,14 @@ from typing import List
 # 456. 132 模式
 class Solution:
     def find132pattern(self, nums: List[int]) -> bool:
-        stack = []
+        monoStack = []
         k = -(10 ** 9 + 7)
         for i in range(len(nums) - 1,-1,-1):
             if nums[i] < k:
                 return True
-            while stack and nums[i] > stack[-1]:
-                k = max(k, stack.pop())
-            stack.append(nums[i])
+            while monoStack and nums[i] > monoStack[-1]:
+                k = max(k, monoStack.pop())
+            monoStack.append(nums[i])
         return False
 
 """
