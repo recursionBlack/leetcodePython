@@ -9,8 +9,8 @@ class Solution:
             if not monoStack or monoStack[-1] < num:
                 monoStack.append(num)
             else:
-                # 说明栈顶元素是大于 v 的，此时说明这两个元素属于同一个分块，
-                # 如果接下来栈中还有大于 v 的元素，说明这些元素跟栈顶元素也属于同一个分块，
+                # 说明栈顶元素是大于 num 的，此时说明这两个元素属于同一个分块，
+                # 如果接下来栈中还有大于 num 的元素，说明这些元素跟栈顶元素也属于同一个分块，
                 # 我们只保存每个分块的最大值，也即是 mx，同一分块的其他元素要弹出。
                 mx = monoStack.pop()
                 while monoStack and num < monoStack[-1]:
