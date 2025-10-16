@@ -7,6 +7,7 @@ from .PrefixSum import NumArray, NumMatrix, RandomSelect, \
     RectsRandomPoint, MyCalendarTwo, Difference
 from .QuqueAndStack import MyCircularQueue, StockSpanner
 from .ListNode import ListNode, TreeNode
+from .UnionFind import UnionFind
 
 # 可选：定义包的版本信息
 __version__ = "0.1.0"
