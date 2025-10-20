@@ -50,10 +50,10 @@ if __name__ == "__main__":
     solution = Solution()
 
     # # 测试用例1：基础案例
-    # edges = [[1,2], [1,3], [2,3]]
-    # print("测试用例1输入 = {}:".format(edges))
-    # print("测试用例1输出:", solution.findRedundantConnection(edges))
-    # # 预期输出:[2,3]
+    edges = [[1,2], [1,3], [2,3]]
+    print("测试用例1输入 = {}:".format(edges))
+    print("测试用例1输出:", solution.findRedundantConnection(edges))
+    # 预期输出:[2,3]
 
     # # 测试用例1：基础案例
     edges = [[1,2], [2,3], [3,4], [1,4], [1,5]]
