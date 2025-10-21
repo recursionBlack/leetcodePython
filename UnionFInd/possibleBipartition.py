@@ -48,6 +48,7 @@ class Solution2:
         # 定义讨厌字典，key为本节点，val为讨厌的节点
         g = defaultdict(list)
         for a, b in dislikes:
+            # 老是容易忘的一句
             a, b = a - 1, b - 1
             g[a].append(b)
             g[b].append(a)
