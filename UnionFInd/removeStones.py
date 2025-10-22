@@ -45,5 +45,5 @@ if __name__ == "__main__":
     # # 测试用例1：基础案例
     stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
     print("测试用例1输入 = {}:".format(stones))
-    print("测试用例1输出:", solution.removeStones(stones)
+    print("测试用例1输出:", solution.removeStones(stones))
     # 预期输出:5

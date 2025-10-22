@@ -8,7 +8,8 @@ class ListNode:
         self.val = val
         self.next = next
 
-    def list_to_linked_list(self, lst: List[int]):
+    @classmethod
+    def list_to_linked_list(cls, lst: List[int]):
         """
         将列表转换为链表
         参数: lst: 输入的列表
