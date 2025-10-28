@@ -9,9 +9,15 @@ class Solution:
         return sorted(lst, key=lambda x: x[1])
 
     def scheduleCourse(self, courses: List[List[int]]) -> int:
+        # 根据课程结束时间先进行排序
         courses = self.sort_by_first_element(courses)
-        time = 0
+        time = 0    # 累计修课用的时间
+        # 用一个大根堆，来维护
         heap = []
+        # 对于每一门课程，如果该课程的花费时间，加上当前其他课程的结束时间，小于课程的结束时间
+        # 则将该门课加进time里，并将该课程的花费时间，存到大根堆里维护
+        # 如果该课程时间超了，但大根堆里，有别的课程，耗时代价较大，则将该耗时较大的课程踢出
+        # 将当前课程加进来
         for val, end in courses:
             if time + val <= end:
                 heapq.heappush(heap, -val)
