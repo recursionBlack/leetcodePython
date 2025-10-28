@@ -17,7 +17,7 @@ class Solution:
         return sorted(lst, key=lambda x: x[0])
 
     def maxCoverLine(self, lines: List[List[int]]) -> int:
-        self.sort_by_first_element(lines)
+        lines = self.sort_by_first_element(lines)
         n = len(lines)
         res = 0
         hSize = 0
