@@ -28,6 +28,10 @@ class NumArray:
 
 # 304. 二维区域和检索 - 矩阵不可变
 class NumMatrix:
+    """
+    二维前缀和矩阵中每个元素 prefix[i][j] 的核心意义是原始矩阵左上角到 (i-1, j-1) 区域的累加和，
+    它是快速计算任意子矩形和的基础，广泛应用于二维区域求和、子矩阵问题等场景。
+    """
 
     def __init__(self, matrix: List[List[int]]):
         self.m = len(matrix)
@@ -43,6 +47,8 @@ class NumMatrix:
                 # 计算每个矩阵[0, 0, i, j]的元素和
                 self.preSum[i][j] = self.preSum[i - 1][j] + self.preSum[i][j - 1] - self.preSum[i - 1][j - 1] + matrix[i - 1][j - 1]
 
+    # 区域求和
+    # 这里需要注意的是，填写的参数，都是原矩阵的，而前缀和矩阵，要比原矩阵在行与列都要多一格，才能对的上原矩阵
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
         return self.preSum[row2 + 1][col2 + 1] - self.preSum[row2 + 1][col1] - self.preSum[row1][col2 + 1] + self.preSum[row1][col1]
 
